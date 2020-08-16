@@ -18,9 +18,9 @@ export class AnimalsComponent implements OnInit {
     this.service.getAnimals().subscribe(animals => this.animals = animals);
   }
   public deleteAnimal(id:number){
-    this.service.deleteAnimal(id).subscribe(wynik => 
+    this.service.deleteAnimal(id).subscribe(result => 
       {
-        if(wynik) this.service.getAnimals().subscribe(animals => this.animals = animals);
+        if(result) this.service.getAnimals().subscribe(animals => this.animals = animals);
         else console.log("Nie udało się usunąć");
       })
       
