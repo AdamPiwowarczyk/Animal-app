@@ -1,0 +1,14 @@
+<a [routerLink]="['/app-create']">Create</a>
+<table>
+    <th>Id</th> <th>Name</th> <th>Weight</th> <th>Legs</th> <th>Img</th>
+    <tr *ngFor="let animal of animals">
+        <td>{{animal.id}}</td>
+        <td>{{animal.name}}</td>
+        <td>{{animal.weight}}</td>
+        <td>{{animal.legs}}</td>
+        <td [routerLink]="['/app-update', animal.id]">
+            <img src = {{animal.img}} width="150" height="100">
+        </td>
+        <td><input type = button value="Delete" (click)="deleteAnimal(animal.id)"/></td>
+    </tr>
+</table>

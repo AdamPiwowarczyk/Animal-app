@@ -1,0 +1,35 @@
+<form (ngSubmit) = submit()>
+    <table>
+        <tr>
+            <td><label>name</label></td>
+            <td><input type="text" name="name" [(ngModel)] = "animal.name"></td>
+        </tr>
+        <tr>
+            <td><label>weight</label></td>
+            <td><input type="text" name="weight" [(ngModel)] = "animal.weight"></td>
+        </tr>
+        <tr>
+            <td><label>legs</label></td>
+            <td><input type="number" name="legs" [(ngModel)] = "animal.legs"></td>
+        </tr>
+        <tr>
+            <td><label>picture</label></td>
+            <td>
+                <select [(ngModel)] = "animal.img" name="img">
+                    <option *ngFor="let picture of pictures" value="{{picture.address}}">
+                        {{picture.name}}
+                    </option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" />
+
+</form>
+
+<br/>
+    <img width="150" height="100" src={{animal.img}}>
+<br/>
+
+<a [routerLink]="['']">powrót do listy</a>
