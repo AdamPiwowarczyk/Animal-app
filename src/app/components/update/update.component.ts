@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {AnimalService} from '../../services/animal.service'
 import {Router} from '@angular/router'
+import { Animal } from 'src/app/models/animal';
 
 @Component({
   selector: 'app-update',
@@ -10,8 +11,7 @@ import {Router} from '@angular/router'
 })
 export class UpdateComponent implements OnInit {
 
-  private animalId;
-  pictures = [
+  private pictures = [
     {
       address:"../assets/sum-ryba.jpg",
       name:"Sum, król wód"
@@ -29,31 +29,27 @@ export class UpdateComponent implements OnInit {
       name:"Snake"
     }
   ]
-  private animal = {
-    "id":0,
-    "name":'',
-    "weight":0,
-    "legs":0,
-    "img":''
-  }
+
+  private animal: Animal;
 
   constructor(private route: ActivatedRoute, private service: AnimalService, private router: Router) { }
 
   ngOnInit() {
+    this.animal = new Animal(null, '', 0, 0, '');
     this.getAnimal();
    }
 
   getAnimal(){
       this.route.params.subscribe(params => {
         if(params['id']){
-          this.animalId = +params['id']
-          this.service.getAnimal(this.animalId).subscribe(response => this.animal = response)  
+          this.animal.id = +params['id']
+          this.service.getAnimal(this.animal.id).subscribe(response => this.animal = response)  
         }
       }) 
   }
 
   submit(){
-    if(this.animalId)
+    if(this.animal.id)
       this.service.updateAnimal(this.animal).subscribe(response => this.animal = response);
     else
       this.service.createAnimal(this.animal).subscribe();
